@@ -20,8 +20,8 @@ func main() {
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	sess := session.Must(session.NewSession(&aws.Config{
 		Region:      aws.String("ap-northeast-1"),
-		//Endpoint:    aws.String("http://dynamoTest:8000"),
-		Credentials: credentials.NewStaticCredentials("AKIAJRYKCFVFXH4VABZA", "mYNWIsEiRXecxT6EJbW0cD06jsk78H0J+pwFy/Mp", ""),
+		Endpoint:    aws.String("http://dynamoTest:8000"),
+		Credentials: credentials.NewStaticCredentials("tekitou", "tekitou", ""),
 	}))
 	db := dynamo.New(sess)
 	fmt.Println(request.QueryStringParameters["room_name"])
