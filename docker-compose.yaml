@@ -1,0 +1,25 @@
+version: '3'
+services:
+  dynamodb:
+    image: amazon/dynamodb-local
+    ports:
+      - 8000:8000
+    volumes:
+      - ./data:/home/dynamodblocal/data
+    container_name: 'dynamoTest'
+    command: -jar DynamoDBLocal.jar -dbPath ./data -sharedDb
+    networks:
+      - go-chatt
+  awscli:
+    image: xueshanf/awscli
+    environment:
+      - AWS_DEFAULT_REGION=ap-northeast-1
+      - AWS_DEFAULT_OUTPUT=json
+      - AWS_ACCESS_KEY_ID=tekitou
+      - AWS_SECRET_ACCESS_KEY=tekitou
+    depends_on:
+      - dynamodb
+    command: aws dynamodb --profile local --endpoint-url http://localhost:8000 create-table --cli-input-json file://./data/user.json
+networks:
+  go-chatt:
+    driver: bridge

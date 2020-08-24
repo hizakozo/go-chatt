@@ -1,0 +1,19 @@
+{
+  "TableName": "user",
+  "KeySchema": [
+    {
+      "AttributeName": "LoginId",
+      "KeyType": "HASH"
+    }
+  ],
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "LoginId",
+      "AttributeType": "S"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 2,
+    "WriteCapacityUnits": 2
+  }
+}

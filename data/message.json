@@ -1,0 +1,27 @@
+{
+  "TableName": "message",
+  "KeySchema": [
+    {
+      "AttributeName": "Id",
+      "KeyType": "HASH"
+    },
+    {
+      "AttributeName": "RoomName",
+      "KeyType": "RANGE"
+    }
+  ],
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "Id",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "RoomName",
+      "AttributeType": "S"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 2,
+    "WriteCapacityUnits": 2
+  }
+}

@@ -1,0 +1,132 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: using API Gateway, DynamoDB and Lambda
+Globals:
+  Api:
+    Cors:
+      AllowMethods: '''OPTIONS,GET,POST'''
+      AllowHeaders: '''Content-Type,login_id'''
+      AllowOrigin: '''*'''
+  Function:
+    Timeout: 1000
+Resources:
+  SignUp:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://sam-template-store-go-chatt/5f951dbb5c2fdb47d96450da0c490e60
+      Handler: signUp
+      Runtime: go1.x
+      Policies: AmazonDynamoDBFullAccess
+      Tracing: Active
+      Events:
+        PostEvent:
+          Type: Api
+          Properties:
+            Path: /signUp
+            Method: POST
+  SignIn:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://sam-template-store-go-chatt/36e7ad6cbbb65b8990988904125b1793
+      Handler: signIn
+      Runtime: go1.x
+      Policies: AmazonDynamoDBFullAccess
+      Tracing: Active
+      Events:
+        PostEvent:
+          Type: Api
+          Properties:
+            Path: /signIn
+            Method: POST
+  RoomCreate:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://sam-template-store-go-chatt/11e12977705489b5cc5edd9f5dd0b13b
+      Handler: roomCreate
+      Runtime: go1.x
+      Policies: AmazonDynamoDBFullAccess
+      Tracing: Active
+      Events:
+        PostEvent:
+          Type: Api
+          Properties:
+            Path: /roomCreate
+            Method: POST
+  RoomGet:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://sam-template-store-go-chatt/a709cc932dbd0f4575e79659df9e2b64
+      Handler: roomGet
+      Runtime: go1.x
+      Policies: AmazonDynamoDBFullAccess
+      Tracing: Active
+      Events:
+        PostEvent:
+          Type: Api
+          Properties:
+            Path: /roomGet
+            Method: GET
+  RoomInvite:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://sam-template-store-go-chatt/eb33b2e3dadc231f843a1db4e28148ba
+      Handler: roomInvite
+      Runtime: go1.x
+      Policies: AmazonDynamoDBFullAccess
+      Tracing: Active
+      Events:
+        PostEvent:
+          Type: Api
+          Properties:
+            Path: /roomInvite
+            Method: POST
+  MessageSend:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://sam-template-store-go-chatt/b277803d44f9050909b043f84e5b11ff
+      Handler: messageSend
+      Runtime: go1.x
+      Policies: AmazonDynamoDBFullAccess
+      Tracing: Active
+      Events:
+        PostEvent:
+          Type: Api
+          Properties:
+            Path: /messageSend
+            Method: POST
+  MessageGet:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://sam-template-store-go-chatt/a6c0cc40104571822e13c9a1011ffbd5
+      Handler: messageGet
+      Runtime: go1.x
+      Policies: AmazonDynamoDBFullAccess
+      Tracing: Active
+      Events:
+        PostEvent:
+          Type: Api
+          Properties:
+            Path: /messageGet
+            Method: GET
+            Request:
+              parameters:
+                querystrings:
+                  room_name: true
+  SerachUser:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://sam-template-store-go-chatt/d64bcef7f229ec856f5e85a66457b3b9
+      Handler: searchUser
+      Runtime: go1.x
+      Policies: AmazonDynamoDBFullAccess
+      Tracing: Active
+      Events:
+        PostEvent:
+          Type: Api
+          Properties:
+            Path: /searchUser
+            Method: GET
+            Request:
+              parameters:
+                querystrings:
+                  login_id: true
