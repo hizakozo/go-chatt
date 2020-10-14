@@ -1,4 +1,4 @@
-# go-chatt
+# go sam lambda dynamoDB のサンプルアプリケーション
 ユーザー作成
 
 ![スクリーンショット 2020-08-24 10 14 27](https://user-images.githubusercontent.com/47819815/90994481-cc8fa100-e5f3-11ea-8231-0405bba40077.png)
